@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { urlFor } from "@/lib/sanity/client";
+import { portableTextToParagraphs } from "@/lib/sanity/portableText";
 import { Linkedin, Mail } from "lucide-react";
 
 interface AboutSectionProps {
@@ -17,7 +18,7 @@ interface AboutSectionProps {
 }
 
 const AboutSection = ({ tagline, title, subtitle, content, image, linkedinUrl, emailUrl }: AboutSectionProps) => {
-  const aboutContent = typeof content === "string" ? content : "";
+  const contentParagraphs = portableTextToParagraphs(content);
 
   return (
     <section id="about" className="section-padding py-32 bg-white rounded-3xl overflow-hidden shadow-premium">
@@ -67,7 +68,9 @@ const AboutSection = ({ tagline, title, subtitle, content, image, linkedinUrl, e
           </div>
 
           <div className="space-y-6 text-lg text-brand-text opacity-70 leading-relaxed max-w-xl">
-            {aboutContent && <p>{aboutContent}</p>}
+            {contentParagraphs.map((paragraph, index) => (
+              <p key={index}>{paragraph}</p>
+            ))}
           </div>
 
           <div className="mt-12 flex gap-8">

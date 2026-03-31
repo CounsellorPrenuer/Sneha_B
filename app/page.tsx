@@ -1,3 +1,5 @@
+import { client } from "@/lib/sanity/client";
+import { portableTextToParagraphs } from "@/lib/sanity/portableText";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import ServiceCard from "@/components/ServiceCard";
@@ -10,17 +12,60 @@ import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import { Sparkles, Globe } from "lucide-react";
 
+const getData = async () => {
+  const homepage = await client.fetch(`*[_type == "homepage"][0]`);
+  const founder = await client.fetch(`*[_type == "founder"][0]`);
+  const about = await client.fetch(`*[_type == "about"][0]`);
+  const services = await client.fetch(`*[_type == "services"]`);
+  const planCategories = await client.fetch(`*[_type == "planCategories"]{
+    _id,
+    title,
+    "plans": *[_type == "plans" && references(^._id)]
+  }`);
+  const addOns = await client.fetch(`*[_type == "addOnServices"]`);
+  const testimonials = await client.fetch(`*[_type == "testimonials"]`);
+
+  const mission = await client.fetch(`*[_type == "mission"][0]`);
+  const brandStory = await client.fetch(`*[_type == "brandStory"][0]`);
+  const contact = await client.fetch(`*[_type == "contact"][0]`);
+
+  return {
+    homepage:
+      homepage ||
+      (founder
+        ? {
+            heroTitle: founder.title ? `${founder.title}: ${founder.name || "MindAxis"}` : founder.name || "MindAxis",
+            heroSubtitle:
+              typeof founder.bio === "string"
+                ? founder.bio.split("\n")[0]
+                : "Scientific tool-based career guidance powered by AI.",
+            heroCtaText: "Get Started",
+          }
+        : null),
+    brandStory: brandStory || null,
+    about: about || null,
+    services: services || [],
+    planCategories: planCategories || [],
+    addOns: addOns || [],
+    testimonials: testimonials || [],
+    mission: mission || null,
+    contact: contact || null,
+  };
+};
 
 export default async function Home() {
-  const homepage: any | null = null;
-  const brandStory: any | null = null;
-  const about: any | null = null;
-  const services: any[] = [];
-  const planCategories: any[] = [];
-  const addOns: any[] = [];
-  const testimonials: any[] = [];
-  const mission: any | null = null;
-  const contact: any | null = null;
+  const {
+    homepage,
+    brandStory,
+    about,
+    services,
+    planCategories,
+    addOns,
+    testimonials,
+    mission,
+    contact,
+  } = await getData();
+  const missionParagraphs = portableTextToParagraphs(mission?.content);
 
   return (
     <main className="min-h-screen">
@@ -90,9 +135,11 @@ export default async function Home() {
                   {mission.title}
                 </span>
               )}
-              {mission.content && (
+              {missionParagraphs.length > 0 && (
                 <div className="text-3xl md:text-5xl font-bold font-heading mb-10 max-w-4xl leading-tight text-white [&>p]:mb-4">
-                  {typeof mission.content === "string" ? mission.content : ""}
+                  {missionParagraphs.map((paragraph, index) => (
+                    <p key={index}>{paragraph}</p>
+                  ))}
                 </div>
               )}
               {mission.tags?.length > 0 && (

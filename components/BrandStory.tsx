@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Quote } from "lucide-react";
+import { portableTextToParagraphs } from "@/lib/sanity/portableText";
 
 interface BrandStoryProps {
   brandName?: string;
@@ -17,7 +18,7 @@ const BrandStory = ({
   description, 
   quote = "Unlock your true potential." 
 }: BrandStoryProps) => {
-  const storyDescription = typeof description === "string" ? description : "";
+  const descriptionParagraphs = portableTextToParagraphs(description);
 
   return (
     <section className="py-32 bg-white relative overflow-hidden" suppressHydrationWarning>
@@ -53,7 +54,7 @@ const BrandStory = ({
           )}
 
           {/* Description */}
-          {storyDescription && (
+          {descriptionParagraphs.length > 0 && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -61,7 +62,9 @@ const BrandStory = ({
               viewport={{ once: true }}
               className="text-xl md:text-2xl text-brand-text opacity-70 leading-relaxed font-light mb-16 space-y-6"
             >
-              <p>{storyDescription}</p>
+              {descriptionParagraphs.map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+              ))}
             </motion.div>
           )}
 
