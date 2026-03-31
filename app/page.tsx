@@ -12,15 +12,179 @@ import { Sparkles, Globe } from "lucide-react";
 
 
 export default async function Home() {
-  const homepage: any | null = null;
-  const brandStory: any | null = null;
-  const about: any | null = null;
-  const services: any[] = [];
-  const planCategories: any[] = [];
-  const addOns: any[] = [];
-  const testimonials: any[] = [];
-  const mission: any | null = null;
-  const contact: any | null = null;
+  const homepage = {
+    heroTitle: "Scientific Career Clarity, Not Guesswork",
+    heroSubtitle:
+      "MindAxis combines mentorship frameworks with data-driven guidance to help students and professionals make confident career decisions.",
+    heroCtaText: "Book Your First Session",
+  };
+
+  const brandStory = {
+    brandName: "MindAxis",
+    tagline: "Evidence-led growth",
+    description:
+      "We built MindAxis to bridge ambition and direction. Our process blends psychology, market signals, and practical mentoring to create career paths that are realistic, measurable, and deeply personal.",
+    quote: "Clarity creates momentum.",
+  };
+
+  const about = {
+    tagline: "About MindAxis",
+    title: "Mentorship Rooted In Strategy",
+    subtitle: "Human insight + structured execution",
+    content:
+      "From profile positioning and skill-gap analysis to interview readiness, we guide every step with practical action plans. The result is not just motivation, but measurable progress.",
+    image: undefined,
+    linkedinUrl: "https://www.linkedin.com",
+    emailUrl: "claryntia@gmail.com",
+  };
+
+  const services = [
+    {
+      _id: "svc-1",
+      title: "Career Mapping",
+      description: "Build a realistic roadmap based on strengths, interests, and market opportunities.",
+      audience: "Students",
+      mode: "1:1",
+      iconName: "Map",
+    },
+    {
+      _id: "svc-2",
+      title: "Profile Positioning",
+      description: "Refine resume, LinkedIn, and narrative to stand out in internships and job applications.",
+      audience: "Graduates",
+      mode: "Hybrid",
+      iconName: "BadgeCheck",
+    },
+    {
+      _id: "svc-3",
+      title: "Interview Mastery",
+      description: "Practice domain-specific and behavioral interviews with feedback loops and scorecards.",
+      audience: "Professionals",
+      mode: "Online",
+      iconName: "Mic",
+    },
+  ];
+
+  const planCategories = [
+    {
+      _id: "cat-students",
+      title: "Students",
+      plans: [
+        {
+          _id: "plan-starter",
+          name: "Starter",
+          price: "2999",
+          features: [
+            { text: "Career assessment + roadmap", included: true },
+            { text: "2 live mentorship sessions", included: true },
+            { text: "Resume review", included: true },
+            { text: "Interview simulation", included: false },
+          ],
+        },
+        {
+          _id: "plan-accelerate",
+          name: "Accelerate",
+          price: "5999",
+          isPremium: true,
+          features: [
+            { text: "Everything in Starter", included: true },
+            { text: "6 mentorship sessions", included: true },
+            { text: "Interview simulation + feedback", included: true },
+            { text: "30-day action tracker", included: true },
+          ],
+        },
+      ],
+    },
+    {
+      _id: "cat-professionals",
+      title: "Professionals",
+      plans: [
+        {
+          _id: "plan-pivot",
+          name: "Pivot",
+          price: "7999",
+          features: [
+            { text: "Career transition strategy", included: true },
+            { text: "LinkedIn + resume overhaul", included: true },
+            { text: "3 mock interviews", included: true },
+            { text: "Offer negotiation support", included: false },
+          ],
+        },
+        {
+          _id: "plan-lead",
+          name: "Lead",
+          price: "11999",
+          isPremium: true,
+          features: [
+            { text: "Everything in Pivot", included: true },
+            { text: "Leadership branding framework", included: true },
+            { text: "Offer negotiation support", included: true },
+            { text: "90-day growth blueprint", included: true },
+          ],
+        },
+      ],
+    },
+  ];
+
+  const addOns = [
+    {
+      _id: "addon-1",
+      title: "Resume Rewrite",
+      description: "ATS-friendly resume revamp with role-specific keyword optimization.",
+      icon: "FileText",
+      price: "+1499",
+    },
+    {
+      _id: "addon-2",
+      title: "Mock Interview Pack",
+      description: "Two simulated rounds with detailed feedback and improvement checklist.",
+      icon: "MessagesSquare",
+      price: "+1999",
+    },
+    {
+      _id: "addon-3",
+      title: "LinkedIn Growth Kit",
+      description: "Profile optimization and personal brand content strategy for 30 days.",
+      icon: "BriefcaseBusiness",
+      price: "+1299",
+    },
+  ];
+
+  const testimonials = [
+    {
+      _id: "test-1",
+      name: "Niharika S",
+      role: "Data Analyst",
+      quote:
+        "The roadmap was practical and clear. Within six weeks, I moved from confusion to receiving interview calls.",
+    },
+    {
+      _id: "test-2",
+      name: "Rohit V",
+      role: "Final Year Student",
+      quote:
+        "MindAxis helped me align projects, resume, and interview preparation. I landed my first internship confidently.",
+    },
+  ];
+
+  const mission = {
+    title: "Our Mission",
+    content:
+      "To make career decisions structured, transparent, and future-proof for every learner and working professional.",
+    tags: ["Data-backed", "Mentor-led", "Outcome-focused"],
+  };
+
+  const contact = {
+    title: "Send Us a Message",
+    phone: "+91 9886635186",
+    email: "claryntia@gmail.com",
+    location: "Bangalore, India",
+    socials: [
+      { platform: "LinkedIn", url: "https://www.linkedin.com", icon: "Linkedin" },
+      { platform: "Instagram", url: "https://www.instagram.com", icon: "Instagram" },
+      { platform: "X", url: "https://x.com", icon: "Twitter" },
+    ],
+  };
 
   return (
     <main className="min-h-screen">
