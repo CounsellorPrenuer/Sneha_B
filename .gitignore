@@ -36,3 +36,14 @@ next-env.d.ts
 /studio/
 /sanity.config.ts
 /app/studio/
+/.sanity/
+sanity_out.txt
+build_error.txt
+build_final_error.txt
+final_build_attempt.txt
+local_build_test.txt
+local_build_test_2.txt
+local_build_test_3.txt
+npm_error.txt
+npm_error_final.txt
+tsc_output.txt
