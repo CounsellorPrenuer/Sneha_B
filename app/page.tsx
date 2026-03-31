@@ -1,4 +1,3 @@
-import { PortableText } from "next-sanity";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import ServiceCard from "@/components/ServiceCard";
@@ -93,7 +92,7 @@ export default async function Home() {
               )}
               {mission.content && (
                 <div className="text-3xl md:text-5xl font-bold font-heading mb-10 max-w-4xl leading-tight text-white [&>p]:mb-4">
-                  <PortableText value={mission.content} />
+                  {typeof mission.content === "string" ? mission.content : ""}
                 </div>
               )}
               {mission.tags?.length > 0 && (

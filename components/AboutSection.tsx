@@ -5,7 +5,6 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { urlFor } from "@/lib/sanity/client";
 import { Linkedin, Mail } from "lucide-react";
-import { PortableText } from "next-sanity";
 
 interface AboutSectionProps {
   tagline?: string;
@@ -18,6 +17,8 @@ interface AboutSectionProps {
 }
 
 const AboutSection = ({ tagline, title, subtitle, content, image, linkedinUrl, emailUrl }: AboutSectionProps) => {
+  const aboutContent = typeof content === "string" ? content : "";
+
   return (
     <section id="about" className="section-padding py-32 bg-white rounded-3xl overflow-hidden shadow-premium">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -66,7 +67,7 @@ const AboutSection = ({ tagline, title, subtitle, content, image, linkedinUrl, e
           </div>
 
           <div className="space-y-6 text-lg text-brand-text opacity-70 leading-relaxed max-w-xl">
-            {content && <PortableText value={content} />}
+            {aboutContent && <p>{aboutContent}</p>}
           </div>
 
           <div className="mt-12 flex gap-8">

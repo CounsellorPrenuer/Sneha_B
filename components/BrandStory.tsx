@@ -2,7 +2,6 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { PortableText } from "next-sanity";
 import { Quote } from "lucide-react";
 
 interface BrandStoryProps {
@@ -18,6 +17,8 @@ const BrandStory = ({
   description, 
   quote = "Unlock your true potential." 
 }: BrandStoryProps) => {
+  const storyDescription = typeof description === "string" ? description : "";
+
   return (
     <section className="py-32 bg-white relative overflow-hidden" suppressHydrationWarning>
       {/* Decorative accent */}
@@ -52,7 +53,7 @@ const BrandStory = ({
           )}
 
           {/* Description */}
-          {description && (
+          {storyDescription && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -60,7 +61,7 @@ const BrandStory = ({
               viewport={{ once: true }}
               className="text-xl md:text-2xl text-brand-text opacity-70 leading-relaxed font-light mb-16 space-y-6"
             >
-              <PortableText value={description} />
+              <p>{storyDescription}</p>
             </motion.div>
           )}
 
